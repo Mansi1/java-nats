@@ -17,6 +17,7 @@
 package nats.client.spring;
 
 import nats.client.NatsConnector;
+import nats.client.spring.event.ApplicationEventPublishingConnectionStateListener;
 import org.springframework.context.ApplicationEventPublisher;
 
 /**
@@ -26,8 +27,8 @@ import org.springframework.context.ApplicationEventPublisher;
  */
 public class NatsBuilder extends NatsConnector {
 
-	public NatsBuilder(ApplicationEventPublisher applicationEventPublisher) {
-		addConnectionStateListener(new ApplicationEventPublishingConnectionStateListener(applicationEventPublisher));
-	}
+    public NatsBuilder(ApplicationEventPublisher applicationEventPublisher) {
+        addConnectionStateListener(new ApplicationEventPublishingConnectionStateListener(applicationEventPublisher));
+    }
 
 }

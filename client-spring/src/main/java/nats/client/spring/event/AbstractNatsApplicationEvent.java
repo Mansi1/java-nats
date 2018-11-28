@@ -14,17 +14,30 @@
  *   limitations under the License.
  *
  */
-package nats.client.spring;
+package nats.client.spring.event;
 
 import nats.client.Nats;
+import org.springframework.context.ApplicationEvent;
 
 /**
- * This event gets published when the client connects to a NATS server and has successfully authenticated.
+ * Abstract application event class for NATS events.
  *
  * @author Mike Heath
  */
-public class NatsServerReadyApplicationEvent extends AbstractNatsApplicationEvent {
-	public NatsServerReadyApplicationEvent(Nats nats) {
-		super(nats);
-	}
+public abstract class AbstractNatsApplicationEvent extends ApplicationEvent {
+    private final Nats nats;
+
+    public AbstractNatsApplicationEvent(Nats nats) {
+        super(nats);
+        this.nats = nats;
+    }
+
+    public Nats getNats() {
+        return nats;
+    }
+
+    @Override
+    public Nats getSource() {
+        return (Nats) super.getSource();
+    }
 }

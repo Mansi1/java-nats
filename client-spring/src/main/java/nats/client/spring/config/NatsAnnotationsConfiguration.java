@@ -14,17 +14,15 @@
  *   limitations under the License.
  *
  */
-package nats.client.spring;
+package nats.client.spring.config;
 
-import nats.client.Nats;
+import nats.client.spring.EnableNatsAnnotations;
+import nats.client.spring.beans.annotations.subscribe.Subscribe;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportAware;
-import org.springframework.context.annotation.Role;
 import org.springframework.core.type.AnnotationMetadata;
 
 import java.util.Map;
@@ -37,29 +35,18 @@ import java.util.Map;
 @Configuration
 public class NatsAnnotationsConfiguration implements ImportAware, ApplicationContextAware {
 
-	private ApplicationContext applicationContext;
-	private String natsRef;
+    private ApplicationContext applicationContext;
+    private String natsRef;
 
-	@Bean
-	@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
-	public AnnotationConfigBeanPostProcessor natsAnnotationConfigBeanPostProcessor() {
-		final Nats nats;
-		if (natsRef.trim().length() > 0) {
-			nats = applicationContext.getBean(natsRef, Nats.class);
-		} else {
-			nats = applicationContext.getBean(Nats.class);
-		}
-		return new AnnotationConfigBeanPostProcessor(nats);
-	}
 
-	@Override
-	public void setImportMetadata(AnnotationMetadata importMetadata) {
-		final Map<String,Object> attributes = importMetadata.getAnnotationAttributes(EnableNatsAnnotations.class.getName());
-		natsRef = (String) attributes.get("value");
-	}
+    @Override
+    public void setImportMetadata(AnnotationMetadata importMetadata) {
+        final Map<String, Object> attributes = importMetadata.getAnnotationAttributes(EnableNatsAnnotations.class.getName());
+        natsRef = (String) attributes.get("value");
+    }
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }

@@ -14,21 +14,19 @@
  *   limitations under the License.
  *
  */
-package nats.client.spring;
+package nats.client.spring.event;
 
 import nats.client.Nats;
+import nats.client.spring.event.AbstractNatsApplicationEvent;
 
 /**
- * This event gets published when the connection to the NATS server goes down. This event gets published regardless of
- * whether {@link nats.client.Nats#close()} is called or if the connection goes down because of a server or network
- * failure.
+ * This event gets published when a connection is opened to a NATS server.
  *
  * @author Mike Heath
  */
-public class NatsClosedApplicationEvent extends AbstractNatsApplicationEvent {
+public class NatsConnectedApplicationEvent extends AbstractNatsApplicationEvent {
 
-	public NatsClosedApplicationEvent(Nats nats) {
-		super(nats);
-	}
-
+    public NatsConnectedApplicationEvent(Nats nats) {
+        super(nats);
+    }
 }

@@ -17,6 +17,9 @@
 package nats.client.spring;
 
 import nats.client.Nats;
+import nats.client.spring.event.NatsClosedApplicationEvent;
+import nats.client.spring.event.NatsConnectedApplicationEvent;
+import nats.client.spring.event.NatsServerReadyApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.Assert;

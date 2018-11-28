@@ -16,13 +16,11 @@
  */
 package nats.client.spring;
 
+import nats.client.spring.beans.annotations.subscribe.Subscribe;
+import nats.client.spring.config.NatsAnnotationsConfiguration;
 import org.springframework.context.annotation.Import;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Provides Java config support for using the {@link Subscribe @Subscribe} annotation.
@@ -35,9 +33,9 @@ import java.lang.annotation.Target;
 @Import(NatsAnnotationsConfiguration.class)
 public @interface EnableNatsAnnotations {
 
-	/**
-	 * @return name of the {@code Nats} bean to use. Using an empty value will lookup the {@code Nats} instance by type.
-	 */
-	String value() default "";
+    /**
+     * @return name of the {@code Nats} bean to use. Using an empty value will lookup the {@code Nats} instance by type.
+     */
+    String value() default "";
 
 }

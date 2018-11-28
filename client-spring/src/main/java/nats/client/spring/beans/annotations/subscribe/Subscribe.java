@@ -14,39 +14,24 @@
  *   limitations under the License.
  *
  */
-package nats.client.spring;
+package nats.client.spring.beans.annotations.subscribe;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Mike Heath
  */
-public class SubscriptionConfig {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Subscribe {
 
-	private final Object bean;
-	private final String methodName;
-	private final String queueGroup;
-	private final String subscription;
-
-	public SubscriptionConfig(String subscription, Object bean, String methodName, String queueGroup) {
-		this.subscription = subscription;
-		this.bean = bean;
-		this.methodName = methodName;
-		this.queueGroup = queueGroup;
-	}
-
-	public Object getBean() {
-		return bean;
-	}
-
-	public String getMethodName() {
-		return methodName;
-	}
-
-	public String getQueueGroup() {
-		return queueGroup;
-	}
-
-	public String getSubscription() {
-		return subscription;
-	}
-
+    /**
+     * The NATS subject to subscribe to.
+     *
+     * @return the NATS subject.
+     */
+    String value();
 }

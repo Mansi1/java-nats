@@ -16,15 +16,37 @@
  */
 package nats.client.spring.config;
 
-import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
-
 /**
  * @author Mike Heath
  */
-public class NatsNamespaceHandler extends NamespaceHandlerSupport {
-    @Override
-    public void init() {
-        registerBeanDefinitionParser("nats", new NatsBeanDefinitionParser());
-        registerBeanDefinitionParser("annotation-config", new AnnotationConfigDefinitionParser());
+public class SubscriptionConfig {
+
+    private final Object bean;
+    private final String methodName;
+    private final String queueGroup;
+    private final String subscription;
+
+    public SubscriptionConfig(String subscription, Object bean, String methodName, String queueGroup) {
+        this.subscription = subscription;
+        this.bean = bean;
+        this.methodName = methodName;
+        this.queueGroup = queueGroup;
     }
+
+    public Object getBean() {
+        return bean;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public String getQueueGroup() {
+        return queueGroup;
+    }
+
+    public String getSubscription() {
+        return subscription;
+    }
+
 }
